@@ -7,6 +7,7 @@ import Signup from './pages/Signup'
 import Dashboard from './pages/Dashboard'
 import Goals from './pages/Goals'
 import Workouts from './pages/Workouts'
+import Challenges from './pages/Challenges'
 import ProfilePage from './pages/Profile'
 
 function App() {
@@ -45,6 +46,16 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <Workouts />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/challenges"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Challenges />
                 </Layout>
               </ProtectedRoute>
             }
