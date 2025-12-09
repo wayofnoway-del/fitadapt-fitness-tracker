@@ -31,13 +31,22 @@ export default function Login() {
         <div className="text-center mb-8">
           {/* Logo */}
           <div className="flex justify-center mb-4">
-            <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center">
-              <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/>
+            <div className="w-24 h-24 rounded-full flex items-center justify-center" style={{ backgroundColor: '#4A7BA7' }}>
+              <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 100 100">
+                <circle cx="28" cy="18" r="8"/>
+                <path d="M 22 30 Q 20 32 20 35 L 15 55 Q 14 58 17 59 L 22 60 Q 25 60 26 57 L 32 38 L 40 48 L 40 70 Q 40 73 43 73 L 48 73 Q 51 73 51 70 L 51 45 Q 51 42 48 40 L 38 30 L 42 22 Q 48 28 55 32 Q 58 34 60 32 L 63 28 Q 65 25 62 23 Q 52 17 45 10 Q 42 7 38 10 L 28 18 Q 25 20 26 23 Z" />
               </svg>
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">MomentumAI</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', letterSpacing: '0.02em', textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
+            <span style={{
+              background: 'linear-gradient(to bottom, #1e3a8a 0%, #3b82f6 40%, #1e40af 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>Momentum</span>
+            <span className="text-blue-600">AI</span>
+          </h1>
           <p className="text-lg text-blue-600 font-medium mb-3">Where motivation meets intelligence</p>
           <p className="text-gray-600">Welcome back! Please login to your account.</p>
         </div>
