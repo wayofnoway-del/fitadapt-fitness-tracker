@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Users, Plus, Calendar, MapPin, Clock, Trophy, Check, X } from 'lucide-react'
+import { Users, Plus, Calendar, MapPin, Clock, Trophy, Check, X, Zap } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -27,6 +27,7 @@ export default function GroupChallenges() {
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+  const [generatingAI, setGeneratingAI] = useState(false)
 
   // Form state
   const [title, setTitle] = useState('')
@@ -90,6 +91,68 @@ export default function GroupChallenges() {
       setError(err.message)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const generateAIChallenge = async () => {
+    setGeneratingAI(true)
+    setError('')
+    setSuccess('')
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        throw new Error('No active session')
+      }
+
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-group-challenge`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`,
+            'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
+          },
+        }
+      )
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to generate challenge template')
+      }
+
+      // Pre-fill form with AI-generated template
+      const template = result.challengeTemplate
+      setTitle(template.title || '')
+      setDescription(template.description || '')
+      setChallengeType(template.challenge_type || 'running')
+
+      // Map difficulty levels
+      if (template.difficulty === 'beginner-friendly' || template.difficulty === 'easy') {
+        setDifficulty('easy')
+      } else if (template.difficulty === 'advanced' || template.difficulty === 'hard') {
+        setDifficulty('hard')
+      } else {
+        setDifficulty('medium')
+      }
+
+      setMaxParticipants(template.max_participants || 10)
+
+      // Add suggested location to form if provided
+      if (template.location_suggestion) {
+        setLocationName(template.location_suggestion.split(' or ')[0])
+      }
+
+      // Open the modal with pre-filled data
+      setShowCreateModal(true)
+      setSuccess('🎉 AI template generated! Review and customize before creating.')
+      setTimeout(() => setSuccess(''), 5000)
+    } catch (err: any) {
+      setError(err.message || 'Failed to generate AI template')
+    } finally {
+      setGeneratingAI(false)
     }
   }
 
@@ -219,13 +282,32 @@ export default function GroupChallenges() {
           <h1 className="text-3xl font-bold text-gray-900">Group Challenges</h1>
           <p className="text-gray-600 mt-1">Create or join fitness challenges with nearby members</p>
         </div>
-        <button
-          onClick={() => setShowCreateModal(true)}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2"
-        >
-          <Plus className="h-5 w-5" />
-          Create Challenge
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={generateAIChallenge}
+            disabled={generatingAI}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {generatingAI ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                Generating...
+              </>
+            ) : (
+              <>
+                <Zap className="h-5 w-5" />
+                AI Generate
+              </>
+            )}
+          </button>
+          <button
+            onClick={() => setShowCreateModal(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+          >
+            <Plus className="h-5 w-5" />
+            Create Manually
+          </button>
+        </div>
       </div>
 
       {error && (
