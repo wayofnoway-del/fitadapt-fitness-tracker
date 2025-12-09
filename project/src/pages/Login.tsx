@@ -31,12 +31,11 @@ export default function Login() {
         <div className="text-center mb-8">
           {/* Logo */}
           <div className="flex justify-center mb-4">
-            <div className="w-24 h-24 rounded-full flex items-center justify-center" style={{ backgroundColor: '#4A7BA7' }}>
-              <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 100 100">
-                <circle cx="28" cy="18" r="8"/>
-                <path d="M 22 30 Q 20 32 20 35 L 15 55 Q 14 58 17 59 L 22 60 Q 25 60 26 57 L 32 38 L 40 48 L 40 70 Q 40 73 43 73 L 48 73 Q 51 73 51 70 L 51 45 Q 51 42 48 40 L 38 30 L 42 22 Q 48 28 55 32 Q 58 34 60 32 L 63 28 Q 65 25 62 23 Q 52 17 45 10 Q 42 7 38 10 L 28 18 Q 25 20 26 23 Z" />
-              </svg>
-            </div>
+            <img
+              src="/runner-logo.png"
+              alt="MomentumAI Logo"
+              className="w-24 h-24 rounded-full"
+            />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', letterSpacing: '0.02em', textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
             <span style={{
