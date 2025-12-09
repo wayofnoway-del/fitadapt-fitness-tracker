@@ -8,6 +8,8 @@ import Dashboard from './pages/Dashboard'
 import Goals from './pages/Goals'
 import Workouts from './pages/Workouts'
 import Challenges from './pages/Challenges'
+import GymFinder from './pages/GymFinder'
+import GroupChallenges from './pages/GroupChallenges'
 import ProfilePage from './pages/Profile'
 
 function App() {
@@ -56,6 +58,26 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <Challenges />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/gym-finder"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <GymFinder />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/group-challenges"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <GroupChallenges />
                 </Layout>
               </ProtectedRoute>
             }

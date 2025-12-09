@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Target, Activity, Trophy, User, LogOut, Dumbbell } from 'lucide-react'
+import { LayoutDashboard, Target, Activity, Trophy, Users, MapPin, User, LogOut, Dumbbell } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 
 type LayoutProps = {
@@ -22,6 +22,8 @@ export default function Layout({ children }: LayoutProps) {
     { path: '/goals', label: 'Goals', icon: Target },
     { path: '/workouts', label: 'Workouts', icon: Activity },
     { path: '/challenges', label: 'Challenges', icon: Trophy },
+    { path: '/group-challenges', label: 'Group', icon: Users },
+    { path: '/gym-finder', label: 'Find Gyms', icon: MapPin },
     { path: '/profile', label: 'Profile', icon: User },
   ]
 
