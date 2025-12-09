@@ -1,6 +1,6 @@
-# FitAdapt - Fitness Goal Tracker MVP
+# MomentumAI - Where Motivation Meets Intelligence
 
-A complete fitness tracking application built with React, TypeScript, Vite, and Supabase.
+An AI-powered fitness platform combining personalized wellness coaching with community-driven challenges. Built with React, TypeScript, Vite, and Supabase.
 
 ## 🎯 Features
 
